@@ -7,9 +7,15 @@
 
 import Foundation
 
-struct WeatherLocation {
+class WeatherLocation: Codable {
     var name: String
     var latitude: Double
     var longitude: Double
+    
+    init(name: String, latitude: Double, longitide: Double){
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitide
+    }
     
 }

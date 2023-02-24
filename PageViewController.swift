@@ -28,7 +28,7 @@ class PageViewController: UIPageViewController {
             print("⚠️ waring")
             
             //TODO: 取得用戶的第一筆資料
-            weatherLocations.append(WeatherLocation(name: "最近地點", latitude: 20.20, longitide: 20.20))
+            weatherLocations.append(WeatherLocation(name: "最近地點", latitude: 20.20, longitude: 20.20))
             return
         }
         
@@ -40,7 +40,7 @@ class PageViewController: UIPageViewController {
         }
         if weatherLocations.isEmpty {
             //TODO: 取得用戶的第一筆資料
-            weatherLocations.append(WeatherLocation(name: "最近地點", latitude: 20.20, longitide: 20.20))
+                weatherLocations.append(WeatherLocation(name: "最近地點", latitude: 20.20, longitude: 20.20))
         }
     }
         

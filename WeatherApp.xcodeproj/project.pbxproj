@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		47FF65E66A1112FF3055207B /* libPods-WeatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3672128D477C77D163F1EBA7 /* libPods-WeatherApp.a */; };
+		D9212EF629A47A590083723C /* ForcastDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9212EF529A47A590083723C /* ForcastDetail.swift */; };
+		D9212EF829A492E00083723C /* FiveDaysTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9212EF729A492E00083723C /* FiveDaysTableViewCell.swift */; };
+		D927C993299F928B0018170D /* WeatherDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D927C992299F928B0018170D /* WeatherDetail.swift */; };
 		D94C49B7299D209B00F97488 /* APIkeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94C49B6299D209B00F97488 /* APIkeys.swift */; };
 		D94C49B9299E0EDE00F97488 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94C49B8299E0EDE00F97488 /* LocationDetailViewController.swift */; };
 		D94C49BB299E226300F97488 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94C49BA299E226300F97488 /* PageViewController.swift */; };
@@ -24,6 +27,9 @@
 		3672128D477C77D163F1EBA7 /* libPods-WeatherApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WeatherApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85A6C901AC3D14A53C890095 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		CB64E0E1F1F6161F59B0075A /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D9212EF529A47A590083723C /* ForcastDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastDetail.swift; sourceTree = SOURCE_ROOT; };
+		D9212EF729A492E00083723C /* FiveDaysTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDaysTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D927C992299F928B0018170D /* WeatherDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetail.swift; sourceTree = SOURCE_ROOT; };
 		D94C49B6299D209B00F97488 /* APIkeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIkeys.swift; sourceTree = "<group>"; };
 		D94C49B8299E0EDE00F97488 /* LocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		D94C49BA299E226300F97488 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -90,10 +96,13 @@
 			children = (
 				D94C49B6299D209B00F97488 /* APIkeys.swift */,
 				D988A2B6299D038F00724D20 /* WeatherLocation.swift */,
+				D927C992299F928B0018170D /* WeatherDetail.swift */,
+				D9212EF529A47A590083723C /* ForcastDetail.swift */,
 				D988A2A2299D036900724D20 /* AppDelegate.swift */,
 				D988A2A4299D036900724D20 /* SceneDelegate.swift */,
 				D988A2A6299D036900724D20 /* LocationListViewController.swift */,
 				D94C49B8299E0EDE00F97488 /* LocationDetailViewController.swift */,
+				D9212EF729A492E00083723C /* FiveDaysTableViewCell.swift */,
 				D94C49BA299E226300F97488 /* PageViewController.swift */,
 				D988A2A8299D036900724D20 /* Main.storyboard */,
 				D988A2AB299D036B00724D20 /* Assets.xcassets */,
@@ -219,12 +228,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D988A2A7299D036900724D20 /* LocationListViewController.swift in Sources */,
+				D927C993299F928B0018170D /* WeatherDetail.swift in Sources */,
 				D94C49BB299E226300F97488 /* PageViewController.swift in Sources */,
 				D988A2B7299D038F00724D20 /* WeatherLocation.swift in Sources */,
 				D94C49B7299D209B00F97488 /* APIkeys.swift in Sources */,
 				D988A2A3299D036900724D20 /* AppDelegate.swift in Sources */,
+				D9212EF829A492E00083723C /* FiveDaysTableViewCell.swift in Sources */,
 				D94C49B9299E0EDE00F97488 /* LocationDetailViewController.swift in Sources */,
 				D988A2A5299D036900724D20 /* SceneDelegate.swift in Sources */,
+				D9212EF629A47A590083723C /* ForcastDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

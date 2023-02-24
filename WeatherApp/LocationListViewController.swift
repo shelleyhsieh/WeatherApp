@@ -8,10 +8,11 @@
 import UIKit
 import GooglePlaces
 
+// 使用forcastDetail
+
 class LocationListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var editBarBtn: UIBarButtonItem!
     @IBOutlet weak var addBarBtn: UIBarButtonItem!
     
@@ -100,7 +101,7 @@ extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
   // Handle the user's selection.
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
       
-      let newLocation = WeatherLocation(name: place.name ?? "unknow place", latitude: place.coordinate.latitude, longitide: place.coordinate.longitude)
+      let newLocation = WeatherLocation(name: place.name ?? "unknow place", latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
       weatherLocations.append(newLocation)
       tableView.reloadData()
     dismiss(animated: true, completion: nil)

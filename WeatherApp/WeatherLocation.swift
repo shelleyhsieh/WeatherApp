@@ -12,10 +12,11 @@ class WeatherLocation: Codable {
     var latitude: Double
     var longitude: Double
     
-    init(name: String, latitude: Double, longitide: Double){
+    init(name: String, latitude: Double, longitude: Double){
         self.name = name
         self.latitude = latitude
-        self.longitude = longitide
+        self.longitude = longitude
     }
+    
     
 }

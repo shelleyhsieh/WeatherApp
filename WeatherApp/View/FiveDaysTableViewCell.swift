@@ -27,10 +27,11 @@ class FiveDaysTableViewCell: UITableViewCell {
         }
     }
     
+    // 轉換溫度格式
     func tempFormate(ºC f: Double) -> String {
 // ºC = (ºF - 32 ) x 5 / 9
         let c = (f - 32) * 5 / 9
-        let tempString = String(format: "%.0f", c)
+        let tempString = String(format: "%.0f", c) //取小數點後第0位，意即取整數
         return tempString
     }
     

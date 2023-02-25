@@ -8,9 +8,9 @@
 import Foundation
 
 private let dateFormatter: DateFormatter = {
-    print("📅📅📅 in ForcastDetail")
+    print("📅📅 in ForcastDetail")
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "MMM d, h:mm a"
+    dateFormatter.dateFormat = "MMM d, h:mm a" //Feb 25, 9:32 AM
     return dateFormatter
 }()
 
@@ -81,7 +81,7 @@ class ForcastDetail: WeatherLocation {
     var tempLow = 0.0
     var daysSummary = ""
     var daysIcon = ""
-    var daysForcastData: [DaysForcast] = []
+    var daysForcastData: [DaysForcast] = []  //顯示 近五天/每三小時 的天氣預報
     
     
     func getForcastData(completed: @escaping () -> Void) {
@@ -96,11 +96,6 @@ class ForcastDetail: WeatherLocation {
                 do {
                     let deccrder = JSONDecoder()
                     let forcastResponse = try deccrder.decode(ForcastResult.self, from: data)
-//                    self.daysIcon = forcastResponse.list[0].weather[0].icon
-//                    self.summary = forcastResponse.list[0].weather[0].description
-//                    self.dailydays = forcastResponse.list[0].dt
-//                    self.tempaHight = Int(forcastResponse.list[0].main.tempMax.rounded())
-//                    self.tempLow = Int(forcastResponse.list[0].main.tempMin.rounded())
 
                     for index in 0..<forcastResponse.list.count {
                         let daysIcon = self.fileNameForIcon(icon: forcastResponse.list[index].weather[0].icon)
@@ -113,7 +108,7 @@ class ForcastDetail: WeatherLocation {
                         let daysdaily = dateFormatter.string(from: daysDate)
                         
                         let daysForcast = DaysForcast(daysIcon: daysIcon, daysSummary: daysSummary, daysHigh: tempaHight, daysLow: tempLow, daysdaily: daysdaily, daysHumidity: humidity)
-                        self.daysForcastData.append(daysForcast)
+                        self.daysForcastData.append(daysForcast) //儲存回array中
                         //print("✅五天預報\(daysdaily), high\(tempaHight), low\(tempLow)")
                     }
                     
@@ -124,7 +119,7 @@ class ForcastDetail: WeatherLocation {
             }
         }.resume()
     }
-    //修改
+    
     func fileNameForIcon(icon: String) -> String{
         var newFileName = ""
         switch icon {

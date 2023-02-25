@@ -12,6 +12,7 @@ class WeatherLocation: Codable {
     var latitude: Double
     var longitude: Double
     
+    // 建立啟動方法
     init(name: String, latitude: Double, longitude: Double){
         self.name = name
         self.latitude = latitude

@@ -14,7 +14,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="pMK-ne-0tg" customClass="PageViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y5i-2Q-nbb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-660" y="-713"/>
+            <point key="canvasLocation" x="-1338" y="-39"/>
         </scene>
         <!--Location Detail View Controller-->
         <scene sceneID="WIb-YL-tgC">

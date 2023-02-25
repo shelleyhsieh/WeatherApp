@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>WeatherApp需透過裝置位置來顯示當地天氣</string>
+	<string>請允許使用定位服務來顯示當地天氣</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>WeatherApp需透過裝置位置來顯示當地天氣</string>
+	<string>請允許使用定位服務來顯示當地天氣</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

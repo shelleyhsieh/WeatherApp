@@ -26,21 +26,23 @@ class LocationListViewController: UIViewController {
         tableView.dataSource = self
     }
     
+    //UserDefault是一個用來將資料儲存為 key-value 格式的類別，這個類別會將資料儲存成檔案並放在 Library/Preferences 目錄下，副檔名為 plist，使用於簡易儲存
     func saveLocation(){
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(weatherLocations) {
-            UserDefaults.standard.set(encoded, forKey: "weatherLocations")
+            UserDefaults.standard.set(encoded, forKey: "weatherLocations") //forKey就是這筆資料的名稱，資料型態就限定為String
         } else {
             print("😡 ERROR: saving encode didnt work!")
         }
     }
     
+    // 將UserDefaults儲存的資料，傳至tableview上進行讀取
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         seletedLocationIndex = tableView.indexPathForSelectedRow!.row
         saveLocation()
     }
     
-// 複製todolist
+
     @IBAction func editBarBtnPressed(_ sender: UIBarButtonItem) {
         if tableView.isEditing {
             tableView.setEditing(false, animated: true)
@@ -53,6 +55,7 @@ class LocationListViewController: UIViewController {
             addBarBtn.isEnabled = false
         }
     }
+    
     //複製 place autocomplete的code
     @IBAction func addLocationPressed(_ sender: UIBarButtonItem) {
         let autocompleteController = GMSAutocompleteViewController()
@@ -64,6 +67,7 @@ class LocationListViewController: UIViewController {
     
    
 }
+//MARK: - display location list on table view
 extension LocationListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         weatherLocations.count
@@ -113,6 +117,7 @@ extension LocationListViewController: UITableViewDataSource, UITableViewDelegate
     
 }
 
+// MARK: - location from google place autocomplete
 extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
 
   // Handle the user's selection.
@@ -121,7 +126,7 @@ extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
       let newLocation = WeatherLocation(name: place.name ?? "unknow place", latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
       weatherLocations.append(newLocation)
       tableView.reloadData()
-    dismiss(animated: true, completion: nil)
+      dismiss(animated: true, completion: nil)
   }
 
   func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

@@ -31,7 +31,8 @@ class LocationDetailViewController: UIViewController {
     var forcastDetail: ForcastDetail! //五天預報json存放的位置
     
     var locationManager: CLLocationManager!
-
+    
+    // 儲存pageViewController傳過來的值
     var locationIndex = 0
     
     override func viewDidLoad() {
@@ -44,6 +45,8 @@ class LocationDetailViewController: UIViewController {
         // 當locationIndex等於0時，第一次開啟app時，啟動getLocation來取得位置
         if locationIndex == 0 {
             getLocation()
+            
+            print("📍")
         }
         
         updateUI()
@@ -51,13 +54,15 @@ class LocationDetailViewController: UIViewController {
     }
 
     func updateUI () {
-        
+         
         let pageViewController = UIApplication.shared.windows.first?.rootViewController as! PageViewController
+        //在目前位置取得locationIndex
         let weatherLocation = pageViewController.weatherLocations[locationIndex]
         
-        // 經緯度儲存到weatherDetail，
+        // 經緯度儲存到weatherDetail
         weatherDetail = WeatherDetail(name: weatherLocation.name, latitude: weatherLocation.latitude, longitude: weatherLocation.longitude)
-
+        
+        // 建立pageControl的數量 及 當前頁面為locationIndex
         pageControl.numberOfPages = pageViewController.weatherLocations.count
         pageControl.currentPage = locationIndex
         
@@ -94,32 +99,25 @@ class LocationDetailViewController: UIViewController {
         return tempString
     }
     
-    func timeFormatter(to date: Date?) -> String {
-        guard let inputData = date else { return "" }
-        let formatter = DateFormatter()
-        let timezone = weatherDetail.timezone
-        formatter.timeZone = TimeZone(secondsFromGMT: timezone)
-        formatter.dateFormat = "MM/dd E h:mm a" //Feb 25, 9:32 AM
-        return formatter.string(from: inputData)
-    }
-    
+    // MARK: - segue value display on view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showLocationList" {
             let destination = segue.destination as! LocationListViewController
             let pageViewController = UIApplication.shared.windows.first?.rootViewController as! PageViewController
             destination.weatherLocations = pageViewController.weatherLocations
         }
-        
     }
     
     //顯示add location後的資訊
     @IBAction func unwindFromLocaionListViewController(segue: UIStoryboardSegue) {
         let source = segue.source as! LocationListViewController
-        locationIndex = source.seletedLocationIndex
+        locationIndex = source.seletedLocationIndex //將用戶選到的位置存回locationIndex
         
         let pageViewController = UIApplication.shared.windows.first?.rootViewController as! PageViewController
         
         pageViewController.weatherLocations = source.weatherLocations
+        
+        // 將用戶選到的locationIndex顯示在畫面中
         pageViewController.setViewControllers([pageViewController.createLocationDetailViewController(forPage: locationIndex)], direction: .forward, animated: false, completion: nil)
         
         updateUI()
@@ -129,9 +127,10 @@ class LocationDetailViewController: UIViewController {
         
         let pageViewController = UIApplication.shared.windows.first?.rootViewController as! PageViewController
         
-        var direction: UIPageViewController.NavigationDirection = .forward
+        var direction: UIPageViewController.NavigationDirection = .forward //下一頁
+        
         if sender.currentPage < locationIndex {
-            direction = .reverse
+            direction = .reverse //前一頁
         }
         pageViewController.setViewControllers([pageViewController.createLocationDetailViewController(forPage: sender.currentPage)], direction: direction, animated: true, completion: nil)
     }
@@ -180,7 +179,7 @@ extension LocationDetailViewController: CLLocationManagerDelegate {
         case .restricted:
             oneBtnAlert(title: "不允許使用定位服務", message: "若要開啟定位服務請前往設定")
         case .denied: // 是否改變授權
-            //showAlertToPrivacySettings(title: "使用者無授權定位服務", message: "請至設定>隱私權與安全性>定位服務")
+//            showAlertToPrivacySettings(title: "使用者無授權定位服務", message: "請至設定>隱私權與安全性>定位服務")
             break
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.requestLocation() //允許一次最近位置

@@ -15,7 +15,7 @@ class WeatherDetail: WeatherLocation {
         var clouds: Clouds //雲量
         var dt: TimeInterval //現在時間
         var timezone: Int //時區
-        var name: String //程式名稱
+        var name: String //城市名稱
     }
     struct Weather: Codable {
         var main: String
@@ -52,6 +52,7 @@ class WeatherDetail: WeatherLocation {
     func getData(completed: @escaping () -> ()){
         let urlStr = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&units=imperial&lang=zh_TW&appid=\(APIkeys.openWeatherKey)"
         print("🕸️ 使用近期天氣網址")
+        // 網址正確再往下decode
         guard let url = URL(string: urlStr) else {
             print("😡 ERROR天氣網址錯誤 \(urlStr)")
             return
@@ -64,7 +65,7 @@ class WeatherDetail: WeatherLocation {
                     let result = try decoder.decode(Result.self, from: data)
                     self.timezone = result.timezone
                     self.currentTime = result.dt
-                    self.tempature = result.main.temp //四捨五入取整數.round()
+                    self.tempature = result.main.temp //.round() 可四捨五入
                     self.summary = result.weather[0].description //array中的第一個
                     self.dailyIcon = self.fileNameForIcon(icon: result.weather[0].icon)
                     
@@ -77,7 +78,7 @@ class WeatherDetail: WeatherLocation {
         }.resume()
         
     }
-    
+    // 對照天氣代號顯示正確圖片, d為白天, n為夜晚, 這次不論白天夜晚都先用一樣的圖片
     func fileNameForIcon(icon: String) -> String{
         var newFileName = ""
         switch icon {

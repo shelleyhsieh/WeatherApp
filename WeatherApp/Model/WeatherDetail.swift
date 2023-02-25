@@ -45,7 +45,7 @@ class WeatherDetail: WeatherLocation {
     // 將需要的數值先建立一個儲存位置
     var timezone = 0
     var currentTime = 0.0
-    var tempature = 0
+    var tempature = 0.0
     var summary = ""
     var dailyIcon = ""
     
@@ -64,9 +64,9 @@ class WeatherDetail: WeatherLocation {
                     let result = try decoder.decode(Result.self, from: data)
                     self.timezone = result.timezone
                     self.currentTime = result.dt
-                    self.tempature = Int(result.main.temp.rounded()) //四捨五入取整數
+                    self.tempature = result.main.temp //四捨五入取整數.round()
                     self.summary = result.weather[0].description //array中的第一個
-                    self.dailyIcon = result.weather[0].icon
+                    self.dailyIcon = self.fileNameForIcon(icon: result.weather[0].icon)
                     
                     print("✅\(result)")
                 } catch {
@@ -76,5 +76,32 @@ class WeatherDetail: WeatherLocation {
             } 
         }.resume()
         
+    }
+    
+    func fileNameForIcon(icon: String) -> String{
+        var newFileName = ""
+        switch icon {
+        case "01d", "01n":
+            newFileName = "sun"
+        case "02d","02n" :
+            newFileName = "cloudSun"
+        case "03d","03n" :
+            newFileName = "cloud"
+        case "04d","04n" :
+            newFileName = "brokenClouds"
+        case "09d","09n" :
+            newFileName = "showerRain"
+        case "10d","10n" :
+            newFileName = "rain"
+        case "11d","11n" :
+            newFileName = "storm"
+        case "13d","13n" :
+            newFileName = "snow"
+        case "50d","50n" :
+            newFileName = "rain"
+        default:
+            newFileName = ""
+        }
+        return newFileName
     }
 }

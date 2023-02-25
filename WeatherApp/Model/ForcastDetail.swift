@@ -10,17 +10,18 @@ import Foundation
 private let dateFormatter: DateFormatter = {
     print("📅📅📅 in ForcastDetail")
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEE"
+    dateFormatter.dateFormat = "MMM d, h:mm a"
     return dateFormatter
 }()
 
-//儲存解碼後的數據,並使用在畫面上
+//儲存解碼後的數據,並使用在畫面上(FiveDaysTableViewCell)
 struct DaysForcast: Codable {
     var daysIcon: String
     var daysSummary: String
-    var daysHigh: Int
-    var daysLow: Int
+    var daysHigh: Double
+    var daysLow: Double
     var daysdaily: String
+    var daysHumidity: Int
 }
 
 class ForcastDetail: WeatherLocation {
@@ -76,8 +77,8 @@ class ForcastDetail: WeatherLocation {
     }
     
     var dailydays = 0.0
-    var tempaHight = 0
-    var tempLow = 0
+    var tempaHight = 0.0
+    var tempLow = 0.0
     var daysSummary = ""
     var daysIcon = ""
     var daysForcastData: [DaysForcast] = []
@@ -102,16 +103,18 @@ class ForcastDetail: WeatherLocation {
 //                    self.tempLow = Int(forcastResponse.list[0].main.tempMin.rounded())
 
                     for index in 0..<forcastResponse.list.count {
-                        let daysIcon = forcastResponse.list[index].weather[0].icon
+                        let daysIcon = self.fileNameForIcon(icon: forcastResponse.list[index].weather[0].icon)
                         let daysSummary = forcastResponse.list[index].weather[0].description
-                        let tempaHight = Int(forcastResponse.list[index].main.tempMax.rounded())
-                        let tempLow = Int(forcastResponse.list[index].main.tempMin.rounded())
+                        let tempaHight = forcastResponse.list[index].main.tempMax
+                        let tempLow = forcastResponse.list[index].main.tempMin
+                        let humidity = forcastResponse.list[index].main.humidity
                         let daysDate = Date(timeIntervalSince1970: forcastResponse.list[index].dt)
                         dateFormatter.timeZone = TimeZone(secondsFromGMT: forcastResponse.city.timezone)
                         let daysdaily = dateFormatter.string(from: daysDate)
-                        let daysForcast = DaysForcast(daysIcon: daysIcon, daysSummary: daysSummary, daysHigh: tempaHight, daysLow: tempLow, daysdaily: daysdaily)
+                        
+                        let daysForcast = DaysForcast(daysIcon: daysIcon, daysSummary: daysSummary, daysHigh: tempaHight, daysLow: tempLow, daysdaily: daysdaily, daysHumidity: humidity)
                         self.daysForcastData.append(daysForcast)
-                        print("✅五天預報\(daysdaily), high\(tempaHight), low\(tempLow)")
+                        //print("✅五天預報\(daysdaily), high\(tempaHight), low\(tempLow)")
                     }
                     
                 } catch  {
@@ -120,6 +123,33 @@ class ForcastDetail: WeatherLocation {
                 completed()
             }
         }.resume()
+    }
+    //修改
+    func fileNameForIcon(icon: String) -> String{
+        var newFileName = ""
+        switch icon {
+        case "01d", "01n":
+            newFileName = "sun"
+        case "02d","02n" :
+            newFileName = "cloudSun"
+        case "03d","03n" :
+            newFileName = "cloud"
+        case "04d","04n" :
+            newFileName = "brokenClouds"
+        case "09d","09n" :
+            newFileName = "showerRain"
+        case "10d","10n" :
+            newFileName = "rain"
+        case "11d","11n" :
+            newFileName = "storm"
+        case "13d","13n" :
+            newFileName = "snow"
+        case "50d","50n" :
+            newFileName = "rain"
+        default:
+            newFileName = ""
+        }
+        return newFileName
     }
 }
 

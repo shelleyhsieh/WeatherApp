@@ -93,6 +93,23 @@ extension LocationListViewController: UITableViewDataSource, UITableViewDelegate
         weatherLocations.insert(itemToMove, at: destinationIndexPath.row) //move to destination
         
     }
+    //MARK: - freeze first cell
+    // 預防第一個被刪掉
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // return true 則可以編輯這一行
+        return indexPath.row != 0 ? true : false
+    }
+    // 預防移動到第一個
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        //與canEditRowAt回傳相同的結果，表示不能移動indexPath.row
+        return indexPath.row != 0 ? true : false
+    }
+    
+    //將某些內容移到建議的IndexPath.row，若等於0 則返回到原本的地方，若不等於0則移動到目標的IndexPath
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        return proposedDestinationIndexPath.row == 0 ? sourceIndexPath : proposedDestinationIndexPath
+    }
+
     
 }
 
@@ -116,5 +133,5 @@ extension LocationListViewController: GMSAutocompleteViewControllerDelegate {
   func wasCancelled(_ viewController: GMSAutocompleteViewController) {
     dismiss(animated: true, completion: nil)
   }
-
+    
 }

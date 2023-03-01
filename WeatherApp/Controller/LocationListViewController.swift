@@ -57,6 +57,7 @@ class LocationListViewController: UIViewController {
     }
     
     //複製 place autocomplete的code
+    //新增地點的按鈕上，初始化GMSAutocompleteViewController()，並遵從代理人，顯示使用者的搜尋結果呈現在畫面上
     @IBAction func addLocationPressed(_ sender: UIBarButtonItem) {
         let autocompleteController = GMSAutocompleteViewController()
             autocompleteController.delegate = self
@@ -97,6 +98,7 @@ extension LocationListViewController: UITableViewDataSource, UITableViewDelegate
         weatherLocations.insert(itemToMove, at: destinationIndexPath.row) //move to destination
         
     }
+    
     //MARK: - freeze first cell
     // 預防第一個被刪掉
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

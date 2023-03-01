@@ -9,6 +9,7 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
+    // 建立變數以儲存地理位置的array
     var weatherLocations: [WeatherLocation] = []
 
 
@@ -20,9 +21,10 @@ class PageViewController: UIPageViewController {
         
         loadLocations()
         
-        //先傳入頁碼第一頁，及後續處理左滑及右滑的功能
+        //設定 pageViewControoler 的首頁，先傳入頁碼第一頁，及後續處理左滑及右滑的功能
         setViewControllers([createLocationDetailViewController(forPage: 0)], direction: .forward, animated: false, completion: nil)
 
+        setview
     }
     
     func loadLocations() {
@@ -31,7 +33,7 @@ class PageViewController: UIPageViewController {
             print("⚠️ waring")
             
             //TODO: 取得用戶的第一筆位置
-            weatherLocations.append(WeatherLocation(name: "最近地點", latitude: 00.00, longitude: 00.00))
+            //weatherLocations.append(WeatherLocation(name: "最近地點", latitude: 00.00, longitude: 00.00))
             return
         }
         
@@ -50,7 +52,7 @@ class PageViewController: UIPageViewController {
     //  傳遞 page的index到LocationDetailViewController，以顯示該位置的名稱
     func createLocationDetailViewController (forPage page: Int) -> LocationDetailViewController {
         
-        // 須建立storyboard ID
+        // 須建立storyboard ID 以用來初始化
         let detailViewController = storyboard?.instantiateViewController(withIdentifier: "LocationDetailViewController") as! LocationDetailViewController
         detailViewController.locationIndex = page
         return detailViewController
@@ -61,7 +63,7 @@ class PageViewController: UIPageViewController {
 }
 
 extension PageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-    //向左滑
+    //向左滑(上一頁)
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         if let currentViewController = viewController as? LocationDetailViewController {
@@ -72,7 +74,7 @@ extension PageViewController: UIPageViewControllerDelegate, UIPageViewController
         return nil
     }
     
-    //向右滑
+    //向右滑(下一頁)
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         if let currentViewController = viewController as? LocationDetailViewController {

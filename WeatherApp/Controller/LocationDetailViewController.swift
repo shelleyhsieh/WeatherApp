@@ -56,6 +56,7 @@ class LocationDetailViewController: UIViewController {
     func updateUI () {
          
         let pageViewController = UIApplication.shared.windows.first?.rootViewController as! PageViewController
+        
         //在目前位置取得locationIndex
         let weatherLocation = pageViewController.weatherLocations[locationIndex]
         
@@ -204,7 +205,7 @@ extension LocationDetailViewController: CLLocationManagerDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
-    //TODO: 當新的位置出現時
+    //TODO: 當新的位置出現時，告訴代理人可以開始更新地點了
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("update location")
         

@@ -277,7 +277,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="t5X-c7-gat" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="92" y="-39"/>
+            <point key="canvasLocation" x="50" y="-39"/>
         </scene>
     </scenes>
     <resources>

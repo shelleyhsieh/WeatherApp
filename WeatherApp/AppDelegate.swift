@@ -12,9 +12,10 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
+    // app啟動時,執行的第一個function。告訴delegate，啟動過程即將完成，應用程式幾乎可以執行。可以在這裡跟server拉資料更新使用者狀態或更新檔等。
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // apikeys使用了靜態屬性，故不需要建立實例，也就是不需要建立變數，可直接引用類型
         GMSPlacesClient.provideAPIKey(APIkeys.googlePlaceKey)
         
         return true

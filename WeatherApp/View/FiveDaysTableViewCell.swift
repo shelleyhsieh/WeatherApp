@@ -16,6 +16,7 @@ class FiveDaysTableViewCell: UITableViewCell {
     @IBOutlet weak var daysLowTempLable: UILabel!
     @IBOutlet weak var daysHumidityLable: UILabel!
     
+    // 建立屬性觀察性，當有新的值被設定後立即呼叫，並將舊的屬性值作為參數傳入
     var daysForcast: DaysForcast! {
         didSet {
             dayImageView.image = UIImage(named: daysForcast.daysIcon)
